@@ -9,6 +9,8 @@ BACKEND_URL = os.getenv(
     "https://soc-ai-rulebot-agent.livelyocean-c3150e2c.swedencentral.azurecontainerapps.io/message"
 ).strip()
 
+PORT = int(os.getenv("PORT", "8000"))
+
 app = App()
 
 @app.on_message
