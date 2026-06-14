@@ -1,9 +1,13 @@
+import os
+import asyncio
 import aiohttp
 from microsoft_teams.apps import App, ActivityContext
 from microsoft_teams.api import MessageActivity
-import asyncio
 
-BACKEND_URL = "https://soc-ai-rulebot-agent.livelyocean-c3150e2c.swedencentral.azurecontainerapps.io/message"
+BACKEND_URL = os.getenv(
+    "BACKEND_URL",
+    "https://soc-ai-rulebot-agent.livelyocean-c3150e2c.swedencentral.azurecontainerapps.io/message"
+).strip()
 
 app = App()
 
@@ -20,12 +24,12 @@ async def handle_message(ctx: ActivityContext[MessageActivity]):
             ) as resp:
                 data = await resp.json()
 
-        reply = data.get("reply") or data.get("message") or "No response from backend"
+        reply = data.get("reply") or data.get("message") or "No response from backend."
         await ctx.send(reply)
 
     except Exception as e:
         await ctx.send(f"Error calling backend: {str(e)}")
 
-# Start the Teams app
+
 if __name__ == "__main__":
     asyncio.run(app.start())
