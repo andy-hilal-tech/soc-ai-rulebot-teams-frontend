@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 .env
 SOC-AI-Rulebot-v2.zip
+color.png
+manifest.json
+outline.png
