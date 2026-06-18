@@ -31,7 +31,7 @@ async def handle_message(ctx: ActivityContext[MessageActivity]):
         await ctx.send(reply)
 
     except Exception as e:
-        await ctx.send(f"Error calling backend: {str(e)}")
+        await ctx.send(f"Error calling backend: {type(e).__name__}: {str(e)}")
 
 
 if __name__ == "__main__":
